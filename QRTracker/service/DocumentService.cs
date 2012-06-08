@@ -41,6 +41,7 @@ namespace QRTracker.service
 
         public int AddDocument(BaseQrDoc doc)
         {
+            
             Document docu = new Document();
             docu.hash = doc.Hash;
             docu.typeId = doc.docType;
