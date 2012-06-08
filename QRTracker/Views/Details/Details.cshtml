@@ -1,0 +1,88 @@
+﻿@using System.Web.Script.Serialization
+@model QRTracker.Models.TrackModel
+<table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Date</th>
+            <th>User</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+        
+            
+            @{
+                if (!String.IsNullOrEmpty(Model.qrDoc.qtText))
+                {
+                    try
+                    {
+                      var parts = Model.qrDoc.qtText.Split(new string[] {";", "\r", "\n"}, StringSplitOptions.RemoveEmptyEntries);
+                    <div class="alert alert-info">
+                    No:<strong><div id="docNo">@parts[0]</div></strong>; Type:<strong>@parts[1]</strong>
+                    </div>  
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+
+                }
+            }
+            
+            @{
+                if (Model != null)
+                {
+                    foreach (QRTracker.Models.TrackExtend trackMod in Model.Tracks)
+                    {
+
+                        if (trackMod.Track.deleted.HasValue)
+                        {
+                            if (Model.qrDoc.ActionUser.isManager)
+                            {
+                   <tr class="deleted">
+                    <td>@trackMod.Track.Status.name</td>
+                    <td>@trackMod.Track.statDate</td>
+                    <td>@trackMod.Track.User.name</td>
+                    <td>@trackMod.Track.deleted</td>
+                  </tr>
+                    
+                    @*<p class="deleted">@trackMod.Track.Status.name __ @trackMod.Track.statDate __ @trackMod.Track.User.name __ @trackMod.Track.deleted __ );
+                                                                                                                                                                                                                
+                    </p>*@
+                            }
+                        }
+                        else
+                        {
+
+                  <tr>
+                    <td>@trackMod.Track.Status.name</td>
+                    <td>@trackMod.Track.statDate</td>
+                    <td>@trackMod.Track.User.name</td>
+                    <td>@if (trackMod.AllowAction)
+                        {
+                           @Ajax.ActionLink("Delete", "DeleteTrack", "Actions", new { trackId = trackMod.Track.id }, new AjaxOptions() { UpdateTargetId = "result", OnSuccess = "UpdateTodayTable()" })
+                        }
+                    </td>
+                  </tr>
+                
+               @* <p>@trackMod.Track.Status.name __ @trackMod.Track.statDate __ @trackMod.Track.User.name __ @trackMod.Track.deleted __ @if (trackMod.AllowAction)
+                                                                                                                                      {
+                                                                                                                                          @Ajax.ActionLink("Delete", "DeleteTrack", "Actions", new { trackId = trackMod.Track.id }, new AjaxOptions() { UpdateTargetId = "result" })
+                                                                                                                                     ;
+
+                                                                                                                                      })*@
+            @*    </p>*@
+            }
+        }
+    }
+    
+}
+        </tbody>
+      </table>
+<script type="text/javascript">
+  
+   
+</script>

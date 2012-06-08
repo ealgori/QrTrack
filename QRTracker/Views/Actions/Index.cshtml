@@ -1,0 +1,28 @@
+﻿@using System.Web.Script.Serialization
+@model QRTracker.Models.ActionModel
+ 
+<div id="DetailResult">
+    @{
+        if (Model.Result != null)
+        {
+            if (Model.Result.success)
+            { 
+                <div id = "action-stat" class="alert alert-success">@Model.Result.text</div>
+            }
+            else
+            {
+                <div id = "action-stat" class=" alert-error">@Model.Result.text</div>
+            }
+
+        }
+    }
+    @{if (Model.Tracks != null)
+      {
+          @Html.Action("Details", "Details", new { trackModel = Model.Tracks })
+      }
+  
+    }
+</div>
+
+
+@*@Html.Action("Details","Details",Model.QrDoc)*@

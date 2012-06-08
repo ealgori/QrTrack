@@ -1,0 +1,35 @@
+﻿@model IEnumerable<QRTracker.service.Detail>
+
+@{
+    Layout = null;
+}
+
+   
+
+      
+    
+    @foreach (var item in Model)
+    {
+
+        string className = string.Empty;
+        if (item.posted != null)
+        {
+            className = className + "posted";
+        }
+        if (item.deleted != null)
+        {
+            className += "deleted";
+        }
+
+        <tr class=@className>
+            <td>@item.docNum</td>
+            <td>@item.statuses</td>
+            <td>@item.statDate.ToString("hh:mm")</td>
+            <td>@item.userName</td>
+        </tr>    
+        
+        
+       
+    }
+    
+    
