@@ -109,6 +109,7 @@
     <Content Include="Content\custom.css" />
     <Content Include="Content\demo_page.css" />
     <Content Include="Content\demo_table.css" />
+    <Content Include="Content\glyphicons_081_refresh.png" />
     <Content Include="Content\icon-custom.png" />
     <Content Include="Content\icon-response.png" />
     <Content Include="Content\icon-support.png" />
