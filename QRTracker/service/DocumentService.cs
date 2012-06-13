@@ -169,7 +169,8 @@ namespace QRTracker.service
             DateTime now = DateTime.Now;
             DateTime start = now.GetStartOfDay();
             DateTime end = now.GetEndOfDay();
-            var details = Entities.Details.Where(detai => (detai.statDate > start && detai.statDate < end) || (detai.deleted > start && detai.deleted < end)).OrderBy(deta => deta.statDate).AsEnumerable();
+            //var details = Entities.Details.Where(detai => (detai.statDate > start && detai.statDate < end) || (detai.deleted > start && detai.deleted < end)).OrderBy(deta => deta.statDate).AsEnumerable();
+            var details = Entities.Details.OrderByDescending(deta => deta.statDate).AsEnumerable();
             if (!curUser.isManager)
                 details = details.Where(det => det.userName == userName);
             return details;

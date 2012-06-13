@@ -124,7 +124,14 @@
         ////            bRetrieve: false,
         ////            sAjaxSource: '@Url.Action("GetStatuses", "Today")'
         ////        });
-
+//        var oTable = $('#history');
+//                $("#history tbody").click(function (event) {
+//                    $(oTable.fnSettings().aoData).each(function () {
+//                        $(this.nTr).removeClass('row_selected');
+//                    });
+//                    $(event.target.parentNode).addClass('row_selected');
+//                });
+      
 
 
     });
@@ -201,11 +208,20 @@
                 }
                 return nRow;
             },
+            "aaSorting": [[2, 'desc']],
+            "aoColumns": [
+            null,
+            null,
+            { "sType": "date" },
+            null,
+            null,
+            null],
             bJQueryUI: true,
                bProcessing: true,
-    
-    sScrollY: "200",
-    bScrollCollapse: false
+
+                "bScrollInfinite": true,
+               "bScrollCollapse": true,
+               "sScrollY": "200px"
             
         });
     }
