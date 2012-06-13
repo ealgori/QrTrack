@@ -8,74 +8,106 @@
     <!--[if IE]><script src="../../Scripts/json2.js"></script><![endif]-->
 
 
-    <div class="container">
+    <div class="container-fluid">
     
-        <div class="row">
-            <div class="span4">
-                <div class="well">
+      @*  <div class="row">*@
+            
+            
+        <table class="table table-striped table-bordered table-condensed">
+        <thead>
           
-                    <div class= "container-flex">
+        </thead>
+        <tbody>
+      
+            <tr>
+               
+                <td>
+                    <div class="span5">
+                              <div class="well">
+          
+                                  <div class= "container-flex">
                   
                     
-                        <table class="table table-bordered table-striped">
-                            <tr>
-                                <td colspan="2" style="height: 80px">
-                                    <script type="text/javascript">
-                                        webcam.set_api_url("/Scan/Upload");
-                                        webcam.set_quality(90); // JPEG quality (1 - 100)
-                                        //                              webcam.set_shutter_sound(true); // play shutter click sound
-                                        
-                                        document.write(webcam.get_html(320, 240));
-                                    </script>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="30">
+                                      <table class="table table-bordered table-striped">
+                                          <tr>
+                                              <td colspan="2" style="height: 80px">
+                                                  <script type="text/javascript">
+                                                      webcam.set_api_url("/Scan/Upload");
+                                                      webcam.set_quality(90); // JPEG quality (1 - 100)
+                                                      //                              webcam.set_shutter_sound(true); // play shutter click sound
+
+                                                      document.write(webcam.get_html(320, 240));
+                                                  </script>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td width="30">
                            
-                                    @{ if (Model != null)
-                                       {
-                                           @Html.DropDownList("role", new SelectList(Model,"id","name"))
-                                       } 
-                                    }
-                                    <div class="btn-group">
-                                        <button id ="upload" class="btn btn-success" href="#">Scan</button>
-                                        <button id ="multiple"class="btn btn-primary" data-toggle="buttons-checkbox">Check fo Multiple</button>
-                                    </div>
+                                                  @{ if (Model != null)
+                                                     {
+                                                         @Html.DropDownList("role", new SelectList(Model,"id","name"))
+                                                     } 
+                                                  }
+                                                  <div class="btn-group">
+                                                      <button id ="upload" class="btn btn-success" href="#">Scan</button>
+                                                      <button id ="multiple"class="btn btn-primary" data-toggle="buttons-checkbox">Check fo Multiple</button>
+                                                  </div>
                          
-                                    <img id ="working" src="../../Content/working.gif" style="display: none; " />
-                                </td>
+                                                  <img id ="working" src="../../Content/working.gif" style="display: none; " />
+                                              </td>
         
-                                <td>
+                                              <td>
                                     
-                                </td>
-                            </tr>
+                                              </td>
+                                          </tr>
      
-                        </table>
+                                      </table>
                     
-                        <div id="upload_results"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="span8 well ">
-                <img id = "refresh" class="btn btn-warning" src="../../Content/glyphicons_081_refresh.png" />            
+                                      <div id="upload_results"></div>
+                                  </div>
+                              </div>
+                          </div>
+                </td>
+                <td>
+                    <div class="span4">
+                    <div id="result"></div> 
+                    </div>  
+                </td>
+            </tr>
+            <tr>
+            
+                <td colspan="2">
+                    <div class="span9 well ">
+                        <img id = "refresh" class="btn btn-warning" src="../../Content/glyphicons_081_refresh.png" />            
   
-                <table cellpadding="0" cellspacing="0" border="0" class="display" id="history">
-                    <thead>
-                              <th>DocNum</th>
-                              <th>Статус</th>   
-                              <th>Дата статуса</th> 
-                              <th>Пользователь</th>   
-                              <th>Posted</th> 
-                              <th>Deleted</th>                                                           
-                     </thead>
-                </table>
+                        <table cellpadding="0" cellspacing="0" border="0" class="display" id="history">
+                            <thead>
+                                      <th>DocNum</th>
+                                      <th>Статус</th>   
+                                      <th>Дата статуса</th> 
+                                      <th>Пользователь</th>   
+                                      <th>Posted</th> 
+                                      <th>Deleted</th>                                                           
+                             </thead>
+                        </table>
 
                     
 
-  </div>
-                
+                    </div>
+                </td>
+            
+          </tr>
+        </tbody>
+      </table>
+            
+            
+            
+            
+            
+            
+             
             </div>
-            </div>
+         @*   </div>*@
 
 @*<a href="#" id="upload">Capture image and send for processing</a>*@
 
@@ -145,6 +177,8 @@
 
         if ($('#multiple').hasClass('active')) {
             timer = setInterval("ClickButton()", "3000");
+        } else {
+            $("#refresh").click();
         }
 
     }
@@ -166,9 +200,13 @@
                     nRow.className = "deletedPosted";
                 }
                 return nRow;
-            }, 
+            },
             bJQueryUI: true,
-            sPaginationType: "full_numbers"
+               bProcessing: true,
+    
+    sScrollY: "200",
+    bScrollCollapse: false
+            
         });
     }
 
