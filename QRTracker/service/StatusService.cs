@@ -13,5 +13,10 @@ namespace QRTracker.service
         {
             return false;
         }
+
+        public IEnumerable<Status> GetStatuses()
+        {
+            return Entities.Statuses.OrderBy(stat => stat.id);
+        }
     }
 }

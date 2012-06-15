@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using QRTracker.ImportGen;
 
 namespace QRTracker
 {
@@ -37,7 +38,8 @@ namespace QRTracker
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
+            ImportWorker worker = new ImportWorker();
+            worker.DoWork();
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
         }

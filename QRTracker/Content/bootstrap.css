@@ -99,7 +99,7 @@ body {
   font-family: 'PT Sans', sans-serif;
   font-size: 13px;
   line-height: 18px;
-  color: #595959;
+  color: #000000;
   background: #fff;
 }
 a {
@@ -572,7 +572,7 @@ table {
 .table-bordered td + td,
 .table-bordered th + td,
 .table-bordered td + th {
-  border-left: 1px solid #ddd;
+  /*border-left: 1px solid #ddd;*/
 }
 .table-bordered thead:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child td {
   border-top: 0;
@@ -598,7 +598,7 @@ table {
   border-radius: 0 0 4px 0;
 }
 .table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
-  background-color: #f9f9f9;
+  /*background-color: #f9f9f9;*/
 }
 table .span1 {
   float: none;

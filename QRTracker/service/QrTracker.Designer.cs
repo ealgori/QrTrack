@@ -347,7 +347,9 @@ namespace QRTracker.service
         /// <param name="userName">Initial value of the userName property.</param>
         /// <param name="statuses">Initial value of the statuses property.</param>
         /// <param name="statDate">Initial value of the statDate property.</param>
-        public static Detail CreateDetail(global::System.Int32 id, global::System.String docNum, global::System.String docType, global::System.String userName, global::System.String statuses, global::System.DateTime statDate)
+        /// <param name="docTypeId">Initial value of the DocTypeId property.</param>
+        /// <param name="statusId">Initial value of the StatusId property.</param>
+        public static Detail CreateDetail(global::System.Int32 id, global::System.String docNum, global::System.String docType, global::System.String userName, global::System.String statuses, global::System.DateTime statDate, global::System.Int32 docTypeId, global::System.Int32 statusId)
         {
             Detail detail = new Detail();
             detail.id = id;
@@ -356,6 +358,8 @@ namespace QRTracker.service
             detail.userName = userName;
             detail.statuses = statuses;
             detail.statDate = statDate;
+            detail.DocTypeId = docTypeId;
+            detail.StatusId = statusId;
             return detail;
         }
 
@@ -571,6 +575,84 @@ namespace QRTracker.service
         private Nullable<global::System.DateTime> _deleted;
         partial void OndeletedChanging(Nullable<global::System.DateTime> value);
         partial void OndeletedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DocTypeId
+        {
+            get
+            {
+                return _DocTypeId;
+            }
+            set
+            {
+                if (_DocTypeId != value)
+                {
+                    OnDocTypeIdChanging(value);
+                    ReportPropertyChanging("DocTypeId");
+                    _DocTypeId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("DocTypeId");
+                    OnDocTypeIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _DocTypeId;
+        partial void OnDocTypeIdChanging(global::System.Int32 value);
+        partial void OnDocTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 StatusId
+        {
+            get
+            {
+                return _StatusId;
+            }
+            set
+            {
+                if (_StatusId != value)
+                {
+                    OnStatusIdChanging(value);
+                    ReportPropertyChanging("StatusId");
+                    _StatusId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("StatusId");
+                    OnStatusIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _StatusId;
+        partial void OnStatusIdChanging(global::System.Int32 value);
+        partial void OnStatusIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String hash
+        {
+            get
+            {
+                return _hash;
+            }
+            set
+            {
+                OnhashChanging(value);
+                ReportPropertyChanging("hash");
+                _hash = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("hash");
+                OnhashChanged();
+            }
+        }
+        private global::System.String _hash;
+        partial void OnhashChanging(global::System.String value);
+        partial void OnhashChanged();
 
         #endregion
     

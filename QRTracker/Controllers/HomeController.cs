@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using QRTracker.ImportGen;
 
 namespace QRTracker.Controllers
 {
@@ -11,7 +12,8 @@ namespace QRTracker.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to ASP.NET MVC!";
-
+            //ImportGen.ImportGenetator gen = new ImportGenetator();
+            //gen.ImportGen();
             return View();
         }
 

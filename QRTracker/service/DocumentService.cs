@@ -176,6 +176,22 @@ namespace QRTracker.service
             return details;
         }
 
+        public List<Detail> GetDetails(bool deleted, string status)
+        {
+            var docType = Entities.DocTypes.FirstOrDefault(typ => typ.name == status);
+            if (docType == null)
+                return null;
+            int docTypeId = docType.id;
+            var details = Entities.Details.Where(det => det.DocTypeId == docTypeId);
+            if (deleted)
+                details = details.Where(det => det.deleted != null);
+            else
+            {
+                details = details.Where(det => det.deleted == null);
+            }
+            return details.ToList();
+        }
+
         public int GetDocumentIdByTrackId(int trackId)
         {
             Track track = GetTrackById(trackId);
@@ -213,7 +229,24 @@ namespace QRTracker.service
          
         }
 
-        
+        public void CommitTrackById(int id)
+        {
+            Track track = Entities.Tracks.FirstOrDefault(tr => tr.id == id);
+            if (track==null)
+                return;
+            try
+            {
+                track.posted = DateTime.Now;
+                Save();
+            }
+            catch (Exception)
+            {
+                
+               return;
+            }
+           
+
+        }
 
         #endregion
 

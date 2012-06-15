@@ -24,7 +24,10 @@
       [Details].[statuses] AS [statuses], 
       [Details].[statDate] AS [statDate], 
       [Details].[posted] AS [posted], 
-      [Details].[deleted] AS [deleted]
+      [Details].[deleted] AS [deleted], 
+      [Details].[DocTypeId] AS [DocTypeId], 
+      [Details].[StatusId] AS [StatusId], 
+      [Details].[hash] AS [hash]
       FROM [dbo].[Details] AS [Details]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Documents_DocTypes" Association="QrTrakerModel.Store.FK_Documents_DocTypes">
@@ -152,15 +155,20 @@
             <PropertyRef Name="userName" />
             <PropertyRef Name="statuses" />
             <PropertyRef Name="statDate" />
+            <PropertyRef Name="DocTypeId" />
+            <PropertyRef Name="StatusId" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="docNum" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="docType" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="userName" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="statuses" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="statDate" Type="date" Nullable="false" />
+          <Property Name="statDate" Type="datetime" Nullable="false" />
           <Property Name="posted" Type="datetime" />
           <Property Name="deleted" Type="datetime" />
+          <Property Name="DocTypeId" Type="int" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="hash" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Documents_DocTypes">
           <End Role="DocTypes" Type="QrTrakerModel.Store.DocTypes" Multiplicity="1" />
@@ -411,6 +419,8 @@
             <PropertyRef Name="userName" />
             <PropertyRef Name="statuses" />
             <PropertyRef Name="statDate" />
+            <PropertyRef Name="DocTypeId" />
+            <PropertyRef Name="StatusId" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="docNum" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
@@ -420,6 +430,9 @@
           <Property Name="statDate" Type="DateTime" Nullable="false" />
           <Property Name="posted" Type="DateTime" />
           <Property Name="deleted" Type="DateTime" />
+          <Property Name="DocTypeId" Type="Int32" Nullable="false" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Type="String" Name="hash" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Documents_DocTypes">
           <End Role="DocTypes" Type="QrTrakerModel.DocType" Multiplicity="1" />
@@ -578,7 +591,8 @@
             <ScalarProperty Name="isManager" ColumnName="isManager" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Details"><EntityTypeMapping TypeName="QrTrakerModel.Detail"><MappingFragment StoreEntitySet="Details">
-            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="hash" ColumnName="hash" />
+                <ScalarProperty Name="id" ColumnName="id" />
             <ScalarProperty Name="docNum" ColumnName="docNum" />
             <ScalarProperty Name="docType" ColumnName="docType" />
             <ScalarProperty Name="userName" ColumnName="userName" />
@@ -586,6 +600,8 @@
             <ScalarProperty Name="statDate" ColumnName="statDate" />
             <ScalarProperty Name="posted" ColumnName="posted" />
             <ScalarProperty Name="deleted" ColumnName="deleted" />
+            <ScalarProperty Name="DocTypeId" ColumnName="DocTypeId" />
+            <ScalarProperty Name="StatusId" ColumnName="StatusId" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
@@ -607,7 +623,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="QrTraker">
+      <Diagram Name="QrTracker">
         <EntityTypeShape EntityType="QrTrakerModel.DocType" Width="1.5" PointX="0.75" PointY="5" Height="1.7879850260416674" IsExpanded="true" />
         <EntityTypeShape EntityType="QrTrakerModel.Document" Width="1.5" PointX="3" PointY="4.625" Height="2.5571907552083317" IsExpanded="true" />
         <EntityTypeShape EntityType="QrTrakerModel.ResultText" Width="1.5" PointX="5.75" PointY="8.5" Height="1.5956835937499996" IsExpanded="true" />
@@ -617,7 +633,7 @@
         <EntityTypeShape EntityType="QrTrakerModel.sysdiagram" Width="1.5" PointX="7.75" PointY="2.5" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="QrTrakerModel.Track" Width="1.5" PointX="5.25" PointY="4.5" Height="2.9417936197916674" IsExpanded="true" />
         <EntityTypeShape EntityType="QrTrakerModel.User" Width="1.5" PointX="3" PointY="8.875" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="QrTrakerModel.Detail" Width="1.5" PointX="7.75" PointY="5.5" Height="2.5571907552083353" IsExpanded="true" />
+        <EntityTypeShape EntityType="QrTrakerModel.Detail" Width="1.5" PointX="7.75" PointY="5.5" Height="2.9417936197916674" IsExpanded="true" />
         <AssociationConnector Association="QrTrakerModel.FK_Documents_DocTypes" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="5.8939925130208337" />
           <ConnectorPoint PointX="3" PointY="5.8939925130208337" />
