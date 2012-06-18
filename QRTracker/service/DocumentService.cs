@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using QRTracker.ImportGen;
+using QRTracker.ImportGen.Abstract;
 using QRTracker.Models;
 using QRTracker.Models.Abstract;
 using QRTracker.service.Abstract;
@@ -114,6 +116,8 @@ namespace QRTracker.service
         /// <returns></returns>
         public List<TrackExtend> GetTracksByQrDoc(BaseQrDoc doc)
         {
+            
+            
             Document document = Entities.Documents.FirstOrDefault(docu => docu.hash == doc.Hash);
             if (document == null)
             {
@@ -178,11 +182,11 @@ namespace QRTracker.service
 
         public List<Detail> GetDetails(bool deleted, string status)
         {
-            var docType = Entities.DocTypes.FirstOrDefault(typ => typ.name == status);
+            var docType = Entities.DocTypes.FirstOrDefault(typ => (typ.name == status));
             if (docType == null)
                 return null;
             int docTypeId = docType.id;
-            var details = Entities.Details.Where(det => det.DocTypeId == docTypeId);
+            var details = Entities.Details.Where(det => (det.DocTypeId == docTypeId)&&(det.posted==null));
             if (deleted)
                 details = details.Where(det => det.deleted != null);
             else

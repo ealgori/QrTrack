@@ -22,13 +22,14 @@ namespace QRTracker
             AlreadyExist,
             HasNoRight,
             SucessDecode,
-            UnknownError
+            UnknownError,
+            ImportNow
 
         };
 
         public static string ImportFolder = @"C:\Import\";
         public static string ImportTempFolder = @"C:\Import\temp\";
 
-        public static int ImportInterval = 5*60*1000;
+        public static int ImportInterval = 1*60*1000;
     }
 }

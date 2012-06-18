@@ -38,37 +38,39 @@ namespace QRTracker.ImportGen
         } 
         
         
-        
-        
-        public static bool PeformWoDeleteImport()
+        private static bool PeformImport(string fileName,string Type, bool deleted)
         {
-            string fileName = "WoDelete(1)({0}).xls";
-            for (int i = 0; i < 1000;i++ )
-                if (!File.Exists(Constants.ImportFolder + string.Format(fileName,i)))
+            //string fileName = "WoDelete(1)({0}).xls";
+            for (int i = 0; i < 1000; i++)
+                if (!File.Exists(Constants.ImportFolder + string.Format(fileName, i)))
                 {
                     fileName = string.Format(fileName, i);
                     break;
-                    
+
                 }
             //получаем статусы
             var statModel = GetStatusHashDictionary();
 
             //получаем данные
-            var detailData = GetData(true, "WO");
+            //var detailData = GetData(true, "WO");
+            var detailData = GetData(deleted, Type);
+
+            if (detailData.Count() == 0)
+                return false;
 
             var docModel = GetDocumentHashDictionart(detailData);
             List<List<string>> sheet = PeformConvert(statModel, docModel, detailData);
             //выполняем преобразование
             //создаем файл
-            string filePath = FileGen(fileName,sheet);
+            string filePath = FileGen(fileName, sheet);
             if (filePath == null)
                 return false;
             // копируем файл в прогрузку
-            string endFile = Constants.ImportFolder+Path.GetFileName(fileName);
+            string endFile = Constants.ImportFolder + Path.GetFileName(fileName);
             try
             {
-                if (!Directory.Exists(Path.GetFullPath(endFile)))
-                    Directory.CreateDirectory(Path.GetFullPath(endFile));
+                if (!Directory.Exists(Path.GetDirectoryName(endFile)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(endFile));
                 File.Copy(filePath, endFile);
             }
             catch (Exception exc)
@@ -88,21 +90,30 @@ namespace QRTracker.ImportGen
 
             return true;
         }
+        
+        public static bool PeformWoDeleteImport()
+        {
+            string fileName = "WoDelete(1)({0}).xls";
+            return PeformImport(fileName, "WO", true);
+        }
 
         public static bool PeformWoInsertImport()
         {
-            return true;
+            string fileName = "WoInsert(1)({0}).xls";
+            return PeformImport(fileName, "WO", false);
         }
 
 
         public static bool PeformPoDeleteImport()
         {
-            return true;
+            string fileName = "PODelete(1)({0}).xls";
+            return PeformImport(fileName, "PO", true);
         }
 
-        public static bool PeformPoInsertItemImport()
+        public static bool PeformPoInsertImport()
         {
-            return true;
+            string fileName = "POInsert(1)({0}).xls";
+            return PeformImport(fileName, "PO", false);
         }
 
       

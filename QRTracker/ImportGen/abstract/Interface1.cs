@@ -22,7 +22,7 @@ namespace QRTracker.ImportGen.Abstract
 
     public class Worker:IWorker
     {
-        public WorkerState State { get; set; }
+        public static WorkerState State { get; set; }
 
         public virtual void DoWork()
         {

@@ -16,14 +16,16 @@ namespace QRTracker.ImportGen
         
         public override void DoWork()
         {
-           // while (true)
+            while (true)
             {
                 State= WorkerState.Working;
                 FileGenerator.PeformWoDeleteImport();
-
+                FileGenerator.PeformWoInsertImport();
+                FileGenerator.PeformPoDeleteImport();
+                FileGenerator.PeformPoInsertImport();
                 //!!!!!!!!!!!!!!
                 State = WorkerState.Started;
-                //Thread.Sleep(Constants.ImportInterval);
+                Thread.Sleep(Constants.ImportInterval);
             }
            
         }

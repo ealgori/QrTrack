@@ -115,6 +115,7 @@ namespace QRTracker.Models.Abstract
                 this.docType = doc.DocType.id;
                 this.ActionUser = user;
                 this.Hash = doc.hash;
+                this.qtText = docNum + ";" + doc.DocType.name;
                 // ну и допишите что хотите
                 IsInited = true;
             }
