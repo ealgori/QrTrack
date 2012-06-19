@@ -62,7 +62,7 @@ namespace QRTracker.service
         }
 
 
-        public List<RoleModel> GetRoles(int userId)
+        public List<RoleListModel> GetRoles(int userId)
         {
             // получаем все права данного пользователя
             var rigths = Entities.Rights.Where(rig => rig.userId == userId).Select(righ=>righ.roleId);
@@ -70,10 +70,19 @@ namespace QRTracker.service
             var _roles =
                Entities.Roles.Where(rol => rigths.Contains(rol.id));
             
-            List<RoleModel> roles = _roles.Select(role => new RoleModel() {id = role.Status.id, name = role.Status.name}).ToList();
+            List<RoleListModel> roles = _roles.Select(role => new RoleListModel() {id = role.Status.id, name = role.Status.name}).ToList();
             return roles;
         }
+        public List<Role> GetAllRoles()
+        {
+           
+            // получаем роли из этих прав
+            var roles =
+               Entities.Roles.ToList();
 
+          
+            return roles;
+        }
 
     }
 }

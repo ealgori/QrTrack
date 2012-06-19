@@ -600,6 +600,10 @@ table {
 .table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
   /*background-color: #f9f9f9;*/
 }
+
+.table-striped tbody tr.highlight td {
+    background-color: red;
+}
 table .span1 {
   float: none;
   width: 44px;
@@ -2313,7 +2317,7 @@ button.btn.small, input[type="submit"].btn.small {
   font-size: 100%;
 }
 .navbar .nav.pull-right {
-  float: right;
+  float: right !important;
 }
 .navbar .nav > li {
   display: block;
@@ -3367,7 +3371,7 @@ background: #fff;
   cursor: pointer;
 }
 .pull-right {
-  float: right;
+  float: right !important;
 }
 .pull-left {
   float: left;

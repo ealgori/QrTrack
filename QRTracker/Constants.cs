@@ -27,7 +27,7 @@ namespace QRTracker
 
         };
 
-        public static string ImportFolder = @"C:\Import\";
+        public static string ImportFolder = @"\\EV001B78BFE400\Import$\upload\";
         public static string ImportTempFolder = @"C:\Import\temp\";
 
         public static int ImportInterval = 1*60*1000;

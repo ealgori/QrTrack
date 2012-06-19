@@ -27,7 +27,12 @@ namespace QRTracker.Controllers
                 return PartialView("Details", trackModel);
             }
         }
-
+        public string GetLastSuccess()
+        {
+            string pattern =
+                @"<a data-ajax='true' data-ajax-mode='replace' data-ajax-update='#lastImp' href='/Details/GetLastSuccess'>{0}</a>";
+            return string.Format(pattern,ImportGen.ImportWorker.LastSuccess.ToString());
+        }
 
 
 

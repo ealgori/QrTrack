@@ -67,16 +67,16 @@ namespace QRTracker.ImportGen
                 return false;
             // копируем файл в прогрузку
             string endFile = Constants.ImportFolder + Path.GetFileName(fileName);
-            try
+          //  try
             {
                 if (!Directory.Exists(Path.GetDirectoryName(endFile)))
                     Directory.CreateDirectory(Path.GetDirectoryName(endFile));
                 File.Copy(filePath, endFile);
             }
-            catch (Exception exc)
-            {
-                return false;
-            }
+            //catch (Exception exc)
+            //{
+            //    return false;
+            //}
 
             while (File.Exists(endFile))
             {

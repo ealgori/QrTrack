@@ -19,10 +19,20 @@ namespace QRTracker.ImportGen
             while (true)
             {
                 State= WorkerState.Working;
-                FileGenerator.PeformWoDeleteImport();
-                FileGenerator.PeformWoInsertImport();
-                FileGenerator.PeformPoDeleteImport();
-                FileGenerator.PeformPoInsertImport();
+                try
+                {
+                    FileGenerator.PeformWoDeleteImport();
+                    FileGenerator.PeformWoInsertImport();
+                    FileGenerator.PeformPoDeleteImport();
+                    FileGenerator.PeformPoInsertImport();
+                    LastSuccess = DateTime.Now;
+                }
+                catch (Exception)
+                {
+                    
+                    throw;
+                }
+                
                 //!!!!!!!!!!!!!!
                 State = WorkerState.Started;
                 Thread.Sleep(Constants.ImportInterval);

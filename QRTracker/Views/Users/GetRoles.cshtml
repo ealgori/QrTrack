@@ -1,0 +1,25 @@
+﻿@model QRTracker.Models.RoleModel
+
+@{
+  
+}
+
+<h2>@Model.User.name</h2>
+@using (Ajax.BeginForm("GetRoles", "Users", new AjaxOptions()))
+{
+    <table id="roles" class="table table-striped">
+        <tr><td>Manager: @Html.CheckBox("asdf", Model.User.isManager)</td> </tr>
+        <tr><td>Viewer: @Html.CheckBox("asdf", Model.User.isViewer)</td> </tr>
+        <tbody>
+            @foreach (var roleModel in Model.roleListModel)
+            {
+
+                <tr>
+                    <td><div>@roleModel.name</div></td>
+                    <td>@Html.CheckBox("asdf", roleModel.hasRole)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="submit">Save</button>
+}

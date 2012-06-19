@@ -23,6 +23,8 @@ namespace QRTracker.ImportGen.Abstract
     public class Worker:IWorker
     {
         public static WorkerState State { get; set; }
+        public static DateTime? LastSuccess { get; set; }
+
 
         public virtual void DoWork()
         {

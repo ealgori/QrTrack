@@ -27,6 +27,28 @@ namespace QRTracker.service
             }
             return user.First();
         }
+
+        public User GetUser(int id)
+        {
+            var user = Entities.Users.Where(us => us.id == id);
+            if (user.Count() == 0)
+            {
+                return null;
+            }
+            return user.First();
+        }
+
+
+        public User GetUserWithDomain(string userName)
+        {
+            userName = OtherFunctions.StripDomain(userName);
+            var user = Entities.Users.Where(us => us.name == userName);
+            if (user.Count() == 0)
+            {
+                return AddUser(userName);
+            }
+            return user.First();
+        }
         public User AddUser(string userName)
         {
             User user = new User(){name = userName,isManager = false, isViewer = false};
@@ -63,6 +85,11 @@ namespace QRTracker.service
                 return false;
             }
             ;
+        }
+
+        public List<User> GetAllUsers()
+        {
+            return Entities.Users.ToList();
         }
     }
 }

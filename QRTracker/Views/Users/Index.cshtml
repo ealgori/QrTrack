@@ -1,0 +1,41 @@
+﻿@model List<QRTracker.service.User>
+<script src="../../Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>АХАХАХХАХА</h2>
+<div class="row well">
+    <div class="span4 well">
+            <table id="users" class="table table-striped">
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    
+                    <tr>@Html.Hidden("id",user.id) <td>@user.id</td><td>@user.name</td></tr>
+                }
+               
+            </tbody>
+        </table>​
+
+    </div>
+    <div class="span7 well">
+    <div id="upload"></div>
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#users tbody tr').live('click', function (event) {
+            $(this).addClass('highlight').siblings().removeClass('highlight');
+            var id =$(this).children('#id').val();
+            $.get('Users/GetRoles/' + id, function (data) {
+                $('#upload').html(data);
+            });
+        });
+
+    })
+   
+</script>

@@ -1,4 +1,5 @@
-﻿
+﻿@using QRTracker.service
+
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -42,10 +43,25 @@
           </a>
           <a class="brand" href="index.htm"><img src="http://missiongeek.com/storage/post-images/2011/06/Super%20Mario%20Bros.3%20Banner.png?__SQUARESPACE_CACHEVERSION=1309182264481" alt="your slogan here"></a>
           <div class="nav-collapse in" style="height:auto;">
-            <ul class="nav">
-              <li>@Html.ActionLink("Scan","Index","Home")</li>
-             <li>@Html.ActionLink("About","Index","About")</li>
-            </ul>
+              <ul class="nav">
+                  <li>@Html.ActionLink("Scan","Index","Home")</li>
+                  <li>@Html.ActionLink("About","Index","About")</li>
+                  @{
+                      using (@QRTracker.service.UserService service = new UserService())
+                      {
+                          var user = service.GetUserWithDomain(User.Identity.Name);
+                          if (user.isManager)
+                          {
+                               <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                          }
+
+                      }
+                      
+                  }
+              </ul>
+              
+              <div  style = "color: white" class="navbar-search pull-right">Последний импорт: <div id="lastImp" class="pull">@Html.Action("GetLastSuccess", "Details")</div></div>
+ 
           </div><!--/.nav-collapse -->
         </div>
       </div>
