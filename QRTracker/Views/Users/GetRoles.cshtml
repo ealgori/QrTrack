@@ -5,21 +5,46 @@
 }
 
 <h2>@Model.User.name</h2>
-@using (Ajax.BeginForm("GetRoles", "Users", new AjaxOptions()))
+@using (Ajax.BeginForm("GetRoles", "Users", new AjaxOptions(){UpdateTargetId = "upload"}))
 {
+   @Html.Hidden("userId",Model.User.id) 
     <table id="roles" class="table table-striped">
-        <tr><td>Manager: @Html.CheckBox("asdf", Model.User.isManager)</td> </tr>
-        <tr><td>Viewer: @Html.CheckBox("asdf", Model.User.isViewer)</td> </tr>
+        <tr><td>Manager: @Html.CheckBox("isManager", Model.User.isManager)</td> </tr>
+        <tr><td>Viewer: @Html.CheckBox("isViewer", Model.User.isViewer)</td> </tr>
         <tbody>
             @foreach (var roleModel in Model.roleListModel)
             {
 
                 <tr>
                     <td><div>@roleModel.name</div></td>
-                    <td>@Html.CheckBox("asdf", roleModel.hasRole)</td>
+                    <td>@Html.CheckBox(roleModel.id.ToString(), roleModel.hasRole)</td>
                 </tr>
             }
         </tbody>
     </table>
+     if (Model.ResultText != null)
+    {
+        if (!string.IsNullOrEmpty(Model.ResultText.text))
+        {
+            if (Model.ResultText.success)
+            {
+
+                <div id = "result" class="alert alert-success">@Model.ResultText.text </div>
+               
+
+            }
+            else
+            {
+
+                <div id = "result" class="alert alert-error">@Model.ResultText.text</div>
+                
+            }
+        }
+    }
     <button type="submit">Save</button>
+   
+
 }
+<script>
+    $("#result").delay(5000).fadeToggle();
+</script>

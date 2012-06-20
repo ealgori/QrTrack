@@ -61,7 +61,28 @@ namespace QRTracker.service
            
         }
 
+        public void AddRole(int userId, int roleId)
+        {
+            var role = Entities.Rights.FirstOrDefault(rol => (rol.roleId == roleId) && (rol.userId == userId));
+            if (role == null)
+            {
+                Right right = new Right();
+                right.roleId = roleId;
+                right.userId = userId;
+                Entities.Rights.AddObject(right);
+                Save();
+            }
+        }
 
+        public void RemoveRole(int userId, int roleId)
+        {
+            var role = Entities.Rights.FirstOrDefault(rol => (rol.roleId == roleId) && (rol.userId == userId));
+            if (role != null)
+            {
+                Entities.Rights.DeleteObject(role);
+                Save();
+            }
+        }
         public List<RoleListModel> GetRoles(int userId)
         {
             // получаем все права данного пользователя
@@ -70,7 +91,7 @@ namespace QRTracker.service
             var _roles =
                Entities.Roles.Where(rol => rigths.Contains(rol.id));
             
-            List<RoleListModel> roles = _roles.Select(role => new RoleListModel() {id = role.Status.id, name = role.Status.name}).ToList();
+            List<RoleListModel> roles = _roles.Select(role => new RoleListModel() {id = role.id, name = role.Status.name}).ToList();
             return roles;
         }
         public List<Role> GetAllRoles()

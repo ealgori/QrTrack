@@ -10,7 +10,7 @@ namespace QRTracker.Models
     {
         public List<RoleListModel> roleListModel { get; set; }
         public User User { get; set; }
-       
+        public ResultText ResultText { get; set; }
     }
 
     public class RoleListModel

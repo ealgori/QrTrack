@@ -38,6 +38,13 @@ namespace QRTracker.service
             return user.First();
         }
 
+        public void ApplyCurrentValues(User user)
+        {
+            Entities.Users.ApplyCurrentValues(user);
+            Save();
+
+        }
+
 
         public User GetUserWithDomain(string userName)
         {

@@ -21,11 +21,13 @@ namespace QRTracker.ImportGen
                 State= WorkerState.Working;
                 try
                 {
-                    FileGenerator.PeformWoDeleteImport();
-                    FileGenerator.PeformWoInsertImport();
-                    FileGenerator.PeformPoDeleteImport();
-                    FileGenerator.PeformPoInsertImport();
-                    LastSuccess = DateTime.Now;
+                    
+                    bool woDeleteResult = FileGenerator.PeformWoDeleteImport();
+                    bool woInsertResult = FileGenerator.PeformWoInsertImport();
+                    bool poDeleteResult = FileGenerator.PeformPoDeleteImport();
+                    bool poInsertResult = FileGenerator.PeformPoInsertImport();
+                    if (woDeleteResult||woInsertResult||poInsertResult||poDeleteResult)
+                        LastSuccess = DateTime.Now;
                 }
                 catch (Exception)
                 {
