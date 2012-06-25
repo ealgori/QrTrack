@@ -91,7 +91,7 @@ namespace QRTracker.service
             var _roles =
                Entities.Roles.Where(rol => rigths.Contains(rol.id));
             
-            List<RoleListModel> roles = _roles.Select(role => new RoleListModel() {id = role.id, name = role.Status.name}).ToList();
+            List<RoleListModel> roles = _roles.Select(role => new RoleListModel() {id = role.statusId, name = role.Status.name}).ToList();
             return roles;
         }
         public List<Role> GetAllRoles()

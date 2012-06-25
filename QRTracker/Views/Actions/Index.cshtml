@@ -7,11 +7,11 @@
         {
             if (Model.Result.success)
             { 
-                <div id = "action-stat" class="alert alert-success">@Model.Result.text</div>
+                <div id = "action-stat" class="alert alert-success">@MvcHtmlString.Create(Model.Result.text)</div>
             }
             else
             {
-                <div id = "action-stat" class=" alert-error">@Model.Result.text</div>
+                <div id = "action-stat" class=" alert-error">@MvcHtmlString.Create(Model.Result.text)</div>
             }
 
         }

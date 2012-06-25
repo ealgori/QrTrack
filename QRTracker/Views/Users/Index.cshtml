@@ -1,28 +1,37 @@
 ﻿@model List<QRTracker.service.User>
+           
+      <!--[if lt IE 9]>
+      <strong>Пожалуйста, воспользуйтесь другим браузером.</strong>
+    <![endif]-->
 <script src="../../Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+<link href="http://code.jquery.com/ui/1.8.21/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>User Roles</h2>
-<div class="row well">
-    <div class="span4 well">
-            <table id="users" class="table table-striped">
-            <tbody>
-                @foreach (var user in Model)
-                {
-                    
-                    <tr>@Html.Hidden("id",user.id) <td>@user.id</td><td>@user.name</td></tr>
-                }
-               
-            </tbody>
-        </table>​
+<h2 style="margin-bottom: 40px">User Roles</h2>
 
-    </div>
-    <div class="span7 well">
-    <div id="upload"></div>
+<div class="row ">
+    <div class="span4 ui-dialog-content ui-widget-content">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><h3>Users</h3>
+             </div>
+            <table id="users" class="table table-striped">
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                    
+                        <tr>@Html.Hidden("id",user.id) <td>@user.id</td><td>@user.name</td></tr>
+                    }
+               
+                </tbody>
+            </table>​
+       
+        </div>
+    <div class="span7 ui-dialog-content ui-widget-content">
+        <div id="upload"></div>
     </div>
 </div>
+
 
 
 
@@ -30,7 +39,7 @@
     $(document).ready(function () {
         $('#users tbody tr').live('click', function (event) {
             $(this).addClass('highlight').siblings().removeClass('highlight');
-            var id =$(this).children('#id').val();
+            var id =$(this).find('#id').val();
             $.get('Users/GetRoles/' + id, function (data) {
                 $('#upload').html(data);
             });

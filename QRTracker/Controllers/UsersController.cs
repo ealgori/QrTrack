@@ -15,6 +15,7 @@ namespace QRTracker.Controllers
         UserService userService = new UserService();
         RightService rightService = new RightService();
         ResultsService resultsService = new ResultsService();
+        [IsManager]
         public ActionResult Index()
         {
             List<QRTracker.service.User> users = userService.GetAllUsers();
@@ -27,8 +28,8 @@ namespace QRTracker.Controllers
             
         //    /return roleModel;
         //}
-        
-        
+
+        [IsManager]
         public ActionResult GetRoles(string id, ResultText resultText)
         {
 
@@ -47,6 +48,7 @@ namespace QRTracker.Controllers
             return PartialView(roleModel);
         }
         [HttpPost]
+        [IsManager]
         public ActionResult GetRoles(FormCollection collection)
         {
             ResultText resultText = new ResultText();

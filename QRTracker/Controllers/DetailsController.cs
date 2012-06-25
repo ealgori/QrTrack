@@ -29,9 +29,41 @@ namespace QRTracker.Controllers
         }
         public string GetLastSuccess()
         {
-            string pattern =
+            string goodPattern =
                 @"<a data-ajax='true' data-ajax-mode='replace' data-ajax-update='#lastImp' href='/Details/GetLastSuccess'>{0}</a>";
-            return string.Format(pattern,ImportGen.ImportWorker.LastSuccess.ToString());
+            string badPattern =
+               @"<a  style='color:red' data-ajax='true' data-ajax-mode='replace' data-ajax-update='#lastImp' href='/Details/GetLastSuccess'>{0}</a>";
+
+
+
+            if (ImportGen.ImportWorker.LastSuccess == null)
+            {
+                if (ImportGen.ImportWorker.Freeze)
+                {
+                    return string.Format(badPattern, "never" + " :" + ImportGen.ImportWorker.State.ToString());
+                }
+                else
+                {
+                    return string.Format(goodPattern, "never" + " :" + ImportGen.ImportWorker.State.ToString());
+                }
+            }
+            else
+            {
+
+
+                if (ImportGen.ImportWorker.Freeze)
+                {
+                    return string.Format(badPattern,
+                                         ImportGen.ImportWorker.LastSuccess.ToString() + " :" +
+                                         ImportGen.ImportWorker.State.ToString());
+                }
+                else
+                {
+                    return string.Format(goodPattern,
+                                         ImportGen.ImportWorker.LastSuccess.ToString() + " :" +
+                                         ImportGen.ImportWorker.State.ToString());
+                }
+            }
         }
 
 

@@ -69,7 +69,7 @@
                           </div>
                 </td>
                 <td>
-                    <div class="span4">
+                    <div class="span5">
                     <div id="result"></div> 
                     </div>  
                 </td>
@@ -84,7 +84,8 @@
                             <thead>
                                       <th>DocNum</th>
                                       <th>Статус</th>   
-                                      <th>Дата статуса</th> 
+                                        <th>Дата статуса</th>
+                                        <th>invis</th> 
                                       <th>Пользователь</th>   
                                       <th>Posted</th> 
                                       <th>Deleted</th>                                                           
@@ -164,7 +165,8 @@
         // take snapshot and upload to server
         //        document.getElementById('upload_results').innerHTML = '<h1>Uploading...</h1>';
         var roleId = $("#role").val();
-        webcam.set_api_url("/Scan/Upload?role="+roleId);
+        webcam.set_api_url("/Scan/Upload?role=" + roleId);
+       
         webcam.snap();
 
     }
@@ -197,13 +199,13 @@
         $('#history').dataTable({ sAjaxSource: '@Url.Action("GetStatuses", "Today")',
             fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                 //4 -posted, 5- deleted
-                if (aData[4]) {
+                if (aData[5]) {
                     nRow.className = "posted";
                 }
-                if (aData[5]) {
+                if (aData[6]) {
                     nRow.className = "deleted";
                 }
-                if (aData[5] && aData[4]) {
+                if (aData[5] && aData[6]) {
                     nRow.className = "deletedPosted";
                 }
                 return nRow;
@@ -212,16 +214,17 @@
             "aoColumns": [
             null,
             null,
-            { "sType": "date" },
+            { "iDataSort": 3 },
+            { "bVisible": false },
             null,
             null,
             null],
             bJQueryUI: true,
                bProcessing: true,
 
-                "bScrollInfinite": true,
-               "bScrollCollapse": true,
-               "sScrollY": "200px"
+                "bScrollInfinite": false,
+               "bScrollCollapse": false
+              
             
         });
     }

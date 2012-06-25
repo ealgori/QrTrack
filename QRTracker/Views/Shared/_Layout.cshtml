@@ -41,11 +41,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="index.htm"><img src="http://missiongeek.com/storage/post-images/2011/06/Super%20Mario%20Bros.3%20Banner.png?__SQUARESPACE_CACHEVERSION=1309182264481" alt="your slogan here"></a>
+            <img class = "brand" src="../../Content/logo.jpg" />
+          
           <div class="nav-collapse in" style="height:auto;">
               <ul class="nav">
                   <li>@Html.ActionLink("Scan","Index","Home")</li>
-                  <li>@Html.ActionLink("About","Index","About")</li>
+                  <li>@Html.ActionLink("About","About","Home")</li>
                   @{
                       using (@QRTracker.service.UserService service = new UserService())
                       {
@@ -60,7 +61,7 @@
                   }
               </ul>
               
-              <div  style = "color: white" class="navbar-search pull-right">Последний импорт: <div id="lastImp" class="pull">@Html.Action("GetLastSuccess", "Details")</div></div>
+              <div  style = "color: white" class="navbar-search pull-right">Last import: <div id="lastImp" class="pull">@Html.Action("GetLastSuccess", "Details")</div></div>
  
           </div><!--/.nav-collapse -->
         </div>
@@ -69,29 +70,29 @@
 
       <div class="container">
           <div class="hero-unit">
-              @RenderBody() 
-          </div>
+              <div class="container-fluid" style='height: inherit;'>
+                  @RenderBody() 
+              </div>
+              </div>
           </div>
 <!-- FOOTER -->
       <footer>
-        <div class="container">
+          <div class="container">
         <div class="row">
           <div class="span3">
             <div id="jstwitter">
-              <h3>Twitter Feed</h3> 
+              <h3>Contact us:</h3> 
             </div>
           </div>
  
           <div class="span3">
-            <h3>Newsletter</h3>
-            <p>Subscribe to our newsletter and get the latest news!</p>
-            <form action="mail.php" id="subscribe-form" method="post">
-              <input type="text" name="email" id="email" placeholder="Your Email Address">
-              <button type="submit" class="btn btn-primary">Sign Up</button>
-            </form>
+            @*<h3>Newsletter</h3>*@
+            <p>tel: 222-33-22</p>
+            <p>email: email@email.com</p>
           </div>
         </div>
       </div>
+      
       </footer>
 
 

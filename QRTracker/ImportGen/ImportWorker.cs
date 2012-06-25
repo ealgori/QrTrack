@@ -12,6 +12,7 @@ namespace QRTracker.ImportGen
         public ImportWorker()
         {
             State = WorkerState.Started;
+            tick = DateTime.Now;
         }
         
         public override void DoWork()
@@ -22,21 +23,24 @@ namespace QRTracker.ImportGen
                 try
                 {
                     
-                    bool woDeleteResult = FileGenerator.PeformWoDeleteImport();
-                    bool woInsertResult = FileGenerator.PeformWoInsertImport();
-                    bool poDeleteResult = FileGenerator.PeformPoDeleteImport();
-                    bool poInsertResult = FileGenerator.PeformPoInsertImport();
+                    //throw new Exception();
+                    bool woDeleteResult = FileGenerator.PeformWoDeleteImport(this);
+                    bool woInsertResult = FileGenerator.PeformWoInsertImport(this);
+                    bool poDeleteResult = FileGenerator.PeformPoDeleteImport(this);
+                    bool poInsertResult = FileGenerator.PeformPoInsertImport(this);
                     if (woDeleteResult||woInsertResult||poInsertResult||poDeleteResult)
                         LastSuccess = DateTime.Now;
+                    this.Tick();
+                    State = WorkerState.Started;
                 }
-                catch (Exception)
+                catch (Exception exception)
                 {
-                    
-                    throw;
+
+                    State = WorkerState.Error;
                 }
                 
                 //!!!!!!!!!!!!!!
-                State = WorkerState.Started;
+               
                 Thread.Sleep(Constants.ImportInterval);
             }
            

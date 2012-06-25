@@ -40,7 +40,8 @@ namespace QRTracker
         {
             AreaRegistration.RegisterAllAreas();
             ImportWorker worker = new ImportWorker();
-            Task import = Task.Factory.StartNew(()=>worker.DoWork());
+            Task control = Task.Factory.StartNew(()=>worker.Control());
+            Task doWork = Task.Factory.StartNew(() => worker.DoWork());
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
         }

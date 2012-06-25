@@ -90,7 +90,7 @@ namespace QRTracker
             {
                 hash = parts[parts.Count() - 1];
                 int startIndex = input.IndexOf(hash);
-                text = input.Substring(0, startIndex);
+                text = input.Substring(0, startIndex-1);
             }
             catch (Exception)
             {

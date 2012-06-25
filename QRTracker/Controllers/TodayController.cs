@@ -22,7 +22,13 @@ namespace QRTracker.Controllers
             List<string[]> _aaData = new List<string[]>();
             foreach (var track in tracks)
             {
-                _aaData.Add(new string[] { track.docNum, track.statuses, track.statDate.ToString(),track.userName,track.posted.ToString(),track.deleted.ToString() });
+                _aaData.Add(new string[] { track.docNum,
+                    track.statuses,
+                    track.statDate.ToString(Constants.DateFormat),
+                    track.statDate.ToString(Constants.IncorrectDateFormat),
+                    track.userName,
+                    track.posted.HasValue?  track.posted.Value.ToString(Constants.DateFormat):"",
+                    track.deleted.HasValue?  track.deleted.Value.ToString(Constants.DateFormat): "" });
             }
             JsonResult result = Json(new { aaData = _aaData },JsonRequestBehavior.AllowGet);
             return result;
